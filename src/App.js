@@ -6,42 +6,45 @@ import FormMovie from "./components/FormMovie";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 
-
 function App() {
-  const [movies, setMovies] = useState(()=>{
+  const [movies, setMovies] = useState(() => {
     const saved = localStorage.getItem("movies");
     return saved ? JSON.parse(saved) : [];
   });
   const [show, setShow] = useState(false);
 
+  // Sync movies to localStorage whenever movies changes
+  useEffect(() => {
+    localStorage.setItem("movies", JSON.stringify(movies));
+  }, [movies]);
+
   const addMovie = (movie) => {
     console.log("Movie added: ", movie);
-    const updated = [...movies, movie];
-    setMovies(updated);
-    localStorage.setItem("movies", JSON.stringify(updated));
+
+    setMovies((prev) => [...prev, movie]);
   };
 
-  const deleteMovie = (movie) =>{
-    const updated = movies.filter((m)=>m.title !== movie.title);
-    setMovies(updated);
-    localStorage.setItem("movies", JSON.stringify(updated));
-  }
+  const deleteMovie = (movie) => {
+    setMovies((prev) => prev.filter((m) => m.title !== movie.title));
+  };
 
   const searchMovies = (title, rating) => {
-    const moviesArray = JSON.parse(localStorage.getItem("movies"));
-    const filtered = moviesArray.filter(
+    const allMovies = JSON.parse(localStorage.getItem("movies")) || [];
+
+    const filtered = allMovies.filter(
       (m) =>
         m.title.toLowerCase().includes(title.toLowerCase()) &&
         m.rating >= rating
     );
 
-    console.log("Filtered movies: ", filtered);
     setMovies(filtered);
   };
 
   return (
     <>
       <Header firstname="Sylvestre" onSearch={searchMovies} />
+
+        {/* Conditional rendering of FormMovie when clicking on the button */}
 
       <div className="container">
         <Button className="mt-3" onClick={() => setShow(!show)}>
@@ -50,7 +53,7 @@ function App() {
 
         {show && <FormMovie onSave={addMovie} />}
 
-        <MovieList movies={movies} onDelete={deleteMovie}/>
+        <MovieList movies={movies} onDelete={deleteMovie} />
       </div>
 
       <Footer />

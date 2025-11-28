@@ -1,7 +1,7 @@
 # 🎬 Movie App — React Hooks Checkpoint
 
 This project is a small React application designed to display, add, and filter movies or TV shows.  
-It was built as part of the **React Hooks Checkpoint** and demonstrates key React concepts such as **useState**, **useEffect**, functional components, form handling, and data persistence using LocalStorage.
+It was built as part of the **React Hooks Checkpoint** and demonstrates key React concepts such as **useState**, and **useEffect**
 
 ---
 
@@ -77,7 +77,7 @@ src/
 - **React Bootstrap**
 - **JavaScript ES6**
 - **LocalStorage**
-- **FileReader API** (for Base64 conversion)
+- **FileReader API** (for Base64 conversion) for visonning the posters
 
 ---
 
@@ -104,13 +104,7 @@ http://localhost:3000
 
 ---
 
-## 📸 Screenshots (optional)
-
-Add screenshots here if needed.
-
----
 
 ## 👨‍💻 Author
 
 Project created by **Sylvestre** as part of the React Hooks Checkpoint.
-
