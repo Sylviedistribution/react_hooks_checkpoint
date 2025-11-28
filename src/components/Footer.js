@@ -5,11 +5,11 @@ const Footer = () => {
     <footer
       className="bg-dark text-light text-center py-1"
       style={{
-        position: "fixed",
         bottom: 0,
         left: 0,
         width: "100%",
         zIndex: 1000,
+        marginTop: "20px",
       }}
     >
       <Navbar className="justify-content-center bg-dark">
