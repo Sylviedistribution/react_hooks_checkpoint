@@ -11,11 +11,14 @@ function App() {
     const saved = localStorage.getItem("movies");
     return saved ? JSON.parse(saved) : [];
   });
+
+  const [filteredMovies, setFilteredMovies] = useState([]);
+
   const [show, setShow] = useState(false);
 
   // Sync movies to localStorage whenever movies changes
   useEffect(() => {
-    localStorage.setItem("movies", JSON.stringify(movies));
+    setFilteredMovies(movies);
   }, [movies]);
 
   const addMovie = (movie) => {
@@ -29,22 +32,21 @@ function App() {
   };
 
   const searchMovies = (title, rating) => {
-    const allMovies = JSON.parse(localStorage.getItem("movies")) || [];
-
-    const filtered = allMovies.filter(
+    const minRating = rating ? parseFloat(rating) : 0;
+    const filtered = movies.filter(
       (m) =>
         m.title.toLowerCase().includes(title.toLowerCase()) &&
-        m.rating >= rating
+        m.rating >= minRating
     );
 
-    setMovies(filtered);
+    setFilteredMovies(filtered);
   };
 
   return (
     <>
       <Header firstname="Sylvestre" onSearch={searchMovies} />
 
-        {/* Conditional rendering of FormMovie when clicking on the button */}
+      {/* Conditional rendering of FormMovie when clicking on the button */}
 
       <div className="container">
         <Button className="mt-3" onClick={() => setShow(!show)}>
@@ -53,7 +55,7 @@ function App() {
 
         {show && <FormMovie onSave={addMovie} />}
 
-        <MovieList movies={movies} onDelete={deleteMovie} />
+        <MovieList movies={filteredMovies} onDelete={deleteMovie} />
       </div>
 
       <Footer />

@@ -24,7 +24,7 @@ const FormMovie = ({ onSave }) => {
   return (
     <>
       <div className="container z-1 d-flex justify-content-center position-absolute">
-        <Card className="mt-4 mb-4" style={{ width: "500px" }}>
+        <Card className="mt-4 mb-4" style={{ width: "450px" }}>
           <Card.Header style={{fontSize:"20px"}}>Add movie</Card.Header>
           <Card.Body>
             <Form onSubmit={handleSubmit}>
