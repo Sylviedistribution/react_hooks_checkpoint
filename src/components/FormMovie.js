@@ -2,11 +2,13 @@ import { Form, Card, Button } from "react-bootstrap";
 
 const FormMovie = ({ onSave }) => {
   const handleSubmit = (e) => {
+    // Prevent default form submission behavior
     e.preventDefault();
 
     const file = e.target.formPosterUrl.files[0];
     if (!file) return;
-
+    
+    // Read the file as a data URL for preview and storage
     const reader = new FileReader();
     reader.onload = () => {
       const movie = {

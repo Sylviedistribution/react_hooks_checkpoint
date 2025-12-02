@@ -7,16 +7,19 @@ import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 
 function App() {
+  // Initialize movies state from localStorage or as an empty array
   const [movies, setMovies] = useState(() => {
     const saved = localStorage.getItem("movies");
     return saved ? JSON.parse(saved) : [];
   });
 
+  // State for filtered movies based on search criteria
   const [filteredMovies, setFilteredMovies] = useState([]);
 
+  // State to control the visibility of the FormMovie component
   const [show, setShow] = useState(false);
 
-  // Sync movies to localStorage whenever movies changes
+  // Update localStorage and filteredMovies whenever movies state changes
   useEffect(() => {
     setFilteredMovies(movies);
   }, [movies]);

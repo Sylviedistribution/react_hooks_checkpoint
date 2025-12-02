@@ -44,7 +44,7 @@ Deleting a movie:
 With the **Filter** component, users can search:
 - By title (text search)
 - By rating (minimum rating)
-
+a
 Filtering updates the displayed movies in real-time via the `onSearch` callback.
 
 ---
